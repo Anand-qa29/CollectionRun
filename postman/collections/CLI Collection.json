@@ -1,0 +1,57 @@
+{
+	"info": {
+		"_postman_id": "b8fedc53-65ab-4962-947c-0f9319b1a1bb",
+		"name": "CLI Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "4780991-b8fedc53-65ab-4962-947c-0f9319b1a1bb"
+	},
+	"item": [
+		{
+			"name": "jsonplaceholderapi",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c07d7674-46bc-4288-afcf-626d9a1fa01b",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							" // New Try commit \r",
+							" // New One \r",
+							" \r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "317337ad-98a5-4f53-b088-15e0aa5281d4",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/todos/1",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"todos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
