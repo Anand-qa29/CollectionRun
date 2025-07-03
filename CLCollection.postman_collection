@@ -1,0 +1,31 @@
+{
+	"info": {
+		"_postman_id": "78ff9cf7-4013-4639-bbf8-29a160d13787",
+		"name": "CLI Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4780991"
+	},
+	"item": [
+		{
+			"name": "jsonplaceholderapi",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/todos/1",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"todos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
