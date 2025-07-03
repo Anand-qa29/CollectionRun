@@ -1,16 +1,16 @@
-name: Run Postman Collection on Commit
+name: Run Postman Collection and Send Report
 
 on:
   push:
     branches:
-      - main   # or replace with your branch name
+      - main  # Change to your branch name if needed
 
 jobs:
   postman-tests:
     runs-on: ubuntu-latest
 
     steps:
-      - name: ⬇️ Checkout Repository
+      - name: ⬇️ Checkout code
         uses: actions/checkout@v3
 
       - name: 🔧 Install Node.js
@@ -18,9 +18,28 @@ jobs:
         with:
           node-version: '18'
 
-      - name: 📦 Install Newman (Postman CLI)
-        run: npm install -g newman
-
-      - name: 🧪 Run Postman Collection
+      - name: 📦 Install Newman and HTML reporter
         run: |
-          newman run CLCollection.postman_collection.json
+          npm install -g newman
+          npm install -g newman-reporter-htmlextra
+
+      - name: 🧪 Run Postman Collection with HTML report
+        run: |
+          newman run CLCollection.postman_collection.json -r htmlextra --reporter-htmlextra-export newman-report.html
+
+      - name: ✉️ Send Email with HTML Report
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: API Test result
+          to: anand@moontechnolabs.com
+          from: ${{ secrets.EMAIL_USERNAME }}
+          content_type: text/html
+          attachments: newman-report.html
+          body: |
+            <p>Hi Anand,</p>
+            <p>Please find attached the latest API test result HTML report.</p>
+            <p>Thanks,<br>CI/CD Pipeline</p>
