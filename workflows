@@ -24,7 +24,7 @@ jobs:
 
       - name: Run Postman collection
         run: |
-          newman run "CLCollection.postman_collection.json" \
+          newman run "postman/collections/CLI Collection.json" \
             -r html \
             --reporter-html-export newman-report.html
         continue-on-error: true  #  Don't stop workflow on failure
