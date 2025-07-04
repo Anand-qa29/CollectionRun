@@ -1,45 +1,51 @@
-name: Run Postman Collection and Send Report
+name: Run Postman Collection and Send Email
 
 on:
   push:
     branches:
-      - main  # Change to your branch name if needed
+      - main
 
 jobs:
-  postman-tests:
+  run-postman:
     runs-on: ubuntu-latest
 
     steps:
-      - name: ⬇️ Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: 🔧 Install Node.js
+      - name: Install Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-      - name: 📦 Install Newman and HTML reporter
+      - name: Install Newman and HTML reporter
         run: |
-          npm install -g newman
-          npm install -g newman-reporter-htmlextra
+          npm install -g newman newman-reporter-html
 
-      - name: 🧪 Run Postman Collection with HTML report
+      - name: Run Postman collection
         run: |
-          newman run CLCollection.postman_collection.json -r htmlextra --reporter-htmlextra-export newman-report.html
+          newman run "CLCollection.postman_collection.json" \
+            -r html \
+            --reporter-html-export newman-report.html
+        continue-on-error: true  #  Don't stop workflow on failure
 
-      - name: ✉️ Send Email with HTML Report
+      - name: Send HTML report via email
+        if: always()  #  Run this step even if previous step failed
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
           server_port: 465
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: API Test result
-          to: anand@moontechnolabs.com
-          from: ${{ secrets.EMAIL_USERNAME }}
-          content_type: text/html
-          attachments: newman-report.html
+          subject: Postman Test Report (Pass or Fail)
           body: |
-            <p>Hi Anand,</p>
-            <p>Please find attached the latest API test result HTML report.</p>
-            <p>Thanks,<br>CI/CD Pipeline</p>
+            Hello,
+
+            The Postman collection has finished running.
+            Please find the attached HTML report.
+
+            Regards,
+            GitHub Actions Bot
+          to: bodkheanand86@gmail.com
+          from: GitHub Action <${{ secrets.EMAIL_USERNAME }}>
+          attachments: newman-report.html
