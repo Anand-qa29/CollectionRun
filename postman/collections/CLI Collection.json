@@ -20,7 +20,7 @@
 							"\r",
 							" // demo\r",
 							"pm.test(\"Response time is less than 200ms\", function () {\r",
-							"    pm.expect(pm.response.responseTime).to.be.below(50);\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(100);\r",
 							"});"
 						],
 						"type": "text/javascript",
@@ -34,18 +34,95 @@
 			},
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI5IiwiZW1haWwiOiJ0ZXN0Y2xpZW50NjAwQHlvcG1haWwuY29tIiwicm9sZUlkIjoiOSIsIm9yZ2FuaXphdGlvbklkIjoiT1JHSUQtMjkiLCJpYXQiOjE3NTM5NTkyNDMsImV4cCI6MTc1NDA0NTY0M30.DLgJIWwcH2T352T0tUUy0NsOeLXiylb8r556X3HHoZU"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "If-None-Match",
+						"value": "W/\"b2e-mQYVGOwJVaZNh/1cLtNZpL/yHgk-gzip\""
+					},
+					{
+						"key": "Referer",
+						"value": "https://beta8.moontechnolabs.com/tms-one/users"
+					},
+					{
+						"key": "Sec-Fetch-Dest",
+						"value": "empty"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "cors"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "same-origin"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+					},
+					{
+						"key": "ngrok-skip-browser-warning",
+						"value": "69420"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"138\", \"Google Chrome\";v=\"138\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					}
+				],
 				"url": {
-					"raw": "https://jsonplaceholder.typicode.com/todos/1",
+					"raw": "https://beta8.moontechnolabs.com/tms-one-api/api/v1/users?page=1&size=10&sortorder=DESC&userType=qa_user",
 					"protocol": "https",
 					"host": [
-						"jsonplaceholder",
-						"typicode",
+						"beta8",
+						"moontechnolabs",
 						"com"
 					],
 					"path": [
-						"todos",
-						"1"
+						"tms-one-api",
+						"api",
+						"v1",
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						},
+						{
+							"key": "sortorder",
+							"value": "DESC"
+						},
+						{
+							"key": "userType",
+							"value": "qa_user"
+						}
 					]
 				}
 			},
